@@ -1,0 +1,10 @@
+﻿  Source.cpp
+  maze.cpp
+C:\DS project\DS project\maze.cpp(30,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\DS project\DS project\maze.cpp(30,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\DS project\DS project\maze.cpp(39,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\DS project\DS project\maze.cpp(39,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\DS project\DS project\maze.cpp(44,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\DS project\DS project\maze.cpp(44,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  DS project.vcxproj -> C:\DS project\DS project\x64\Debug\DS project.exe

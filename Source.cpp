@@ -1,20 +1,24 @@
-#include <iostream>
+#include <SFML/Graphics.hpp>
+#include<iostream>
 #include"maze.h"
-#include"gost.h"
-#include<vector>
-using namespace std;
+using namespace sf;
 int main()
 {
-	maze lol;
-	lol.display();
-	int x1 = 1, y1 = 1;
-	int x2 = 2, y2 = 9;
-	gost lol1;
-	lol1.BFS(x1, y1, x2, y2, lol.maze_arr);
-	for (int i = 0; i < lol1.final_path.size(); i++)
+	RenderWindow window(sf::VideoMode(843, 900), "SFML works!");
+	maze maz;
+	while (window.isOpen())
 	{
-		
-		cout << lol1.final_path[i].x << " " << lol1.final_path[i].y << endl;
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		window.clear();
+		maz.display(window);
+		window.display();
 	}
 
+	return 0;
 }
