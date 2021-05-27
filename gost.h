@@ -29,6 +29,6 @@ public:
     void move();
     void display();
     void BFS(int x_position, int y_position, int t_x, int t_y, int maze_arr[42][50]);
-
+    void set_pic(string path , int level_number);
     ///////////////////////////////////////
 };

@@ -33,10 +33,10 @@ void our_button::checkClick(int x, int y, sf::RenderWindow& window) {
 		if (y > rect.getPosition().y && y < rect.getPosition().y + rect.getSize().y) {
 			rect.setFillColor(sf::Color(43, 60, 106));
 			text.setFillColor(sf::Color::White);
-			text.setCharacterSize(sz + 5);
-			window.draw(rect);
+			text.setCharacterSize(sz + 10);
+			//window.draw(rect);
 			window.draw(text);
-	
+	        
 	
 					//clicked = 1;
 
@@ -45,11 +45,33 @@ void our_button::checkClick(int x, int y, sf::RenderWindow& window) {
 
 
 	}
-	window.draw(text);
+
+		window.draw(text);
+	
 
 }
 
 void our_button::change_page(bool& ok)
 {
 		ok = 1;
+}
+
+our_button::our_button(string mtext, int posx, int posy, int sz, sf::RenderWindow& window)
+{
+	stringstream ss;
+	font.loadFromFile("ZCOOLKuaiLe-Regular.ttf");
+	text.setFont(font);
+	ss << mtext;
+	text.setString(ss.str());
+	text.setFillColor(sf::Color::White);
+	text.setCharacterSize(sz);
+	text.setPosition(posx, posy);
+	text.getPosition();
+	window.draw(text);
+	
+
+}
+void our_button::display(sf::RenderWindow& window)
+{
+	window.draw(text);
 }

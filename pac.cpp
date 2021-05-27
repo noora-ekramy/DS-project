@@ -2,9 +2,11 @@
 #include<iostream>
 #include<vector>
 #include "maze.h"
+#include"our_button.h"
 using namespace std;
 pac::pac(sf::RenderWindow& window , int num)
 {//
+	mood = 0;
 	level_number = num;
 	if (!pacman_pic.loadFromFile("pac_man.jpg"))
 	{
@@ -14,6 +16,7 @@ pac::pac(sf::RenderWindow& window , int num)
 	pac_man.setRadius(15/level_number);
 	pac_man.setPosition(sf::Vector2f(12 * 42 , 15 * 42));
 	window.draw(pac_man);
+	
 	//pac_man.setOrigin(30 * 42, 30 * 42 + 10);
 }
 void pac::move(maze& maze)
@@ -39,7 +42,7 @@ void pac::move(maze& maze)
 			{
 				maze.maze_arr[int((pos.y - 1) / (42 / level_number))][int(pos.x / (42 / level_number))] = 2;
 				score += 50;
-				//mood = 1;
+				mood = 1;
 			}
 			pac_man.move(0, -speed);
 			//sprite.setRotation(270);
@@ -63,7 +66,7 @@ void pac::move(maze& maze)
 			{
 				maze.maze_arr[int((pos.y + 1) / (42 / level_number)) + 1][int(pos.x / (42 / level_number))] = 2;
 				score += 50;
-				//mood = 1;
+				mood = 1;
 			}
 			pac_man.move(0, speed);
 			//pac_man.setRotation(90);
@@ -89,7 +92,7 @@ void pac::move(maze& maze)
 				{
 					maze.maze_arr[int(pos.y / (42 / level_number))][int((pos.x + 1) / (42 / level_number)) + 1] = 2;
 					score += 50;
-					//mood = 1;
+					mood = 1;
 				}
 				pac_man.move(speed, 0);
 				//pac_man.setRotation(0);
@@ -117,7 +120,7 @@ void pac::move(maze& maze)
 				{
 					maze.maze_arr[int(pos.y / (42 / level_number))][int((pos.x - 1) / (42 / level_number))] = 2;
 					score += 50;
-					//mood = 1;
+					mood = 1;
 				}
 				
 				pac_man.move(-speed, 0);
@@ -130,6 +133,7 @@ void pac::move(maze& maze)
 			}
 		}
 	}
+
 
 
 }

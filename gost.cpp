@@ -3,6 +3,15 @@
 void gost::move() {
 
 }
+void gost::set_pic(string path , int level_number)
+{
+    if (!gt.loadFromFile(path))
+    {
+        cout << "hello world";
+    }
+    gs.setTexture(&gt);
+    gs.setSize(Vector2f(30 / level_number, 30 / level_number));
+}
 gost::gost(sf::RenderWindow& window, string s, int x, int y ,int spd ,int level_number) {
 
     if (!gt.loadFromFile(s))

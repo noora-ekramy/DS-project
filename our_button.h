@@ -20,4 +20,6 @@ public:
 	void change_page(bool& ok);
 	bool clicked = 0;
 	sf::String String;
+	our_button( string mtext ,  int posx , int posy , int sz, sf::RenderWindow& window);
+	void display(sf::RenderWindow& window);
 };
