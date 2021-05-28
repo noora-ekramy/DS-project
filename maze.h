@@ -22,6 +22,7 @@ public:
 	CircleShape dot;
 	CircleShape pac_dot;
 	RectangleShape wall;
+	int allpoint=250;
 	int level_number=1;
 	int level;
 	int maze_arr[42][50];
@@ -146,6 +147,8 @@ public:
 	maze(int level);
 	void display(RenderWindow& window);
 	void select_maze();
+	void init(int level_number , int level , bool mood);
+	void select_maze_inf();
 
 };
 

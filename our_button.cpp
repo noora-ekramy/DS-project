@@ -31,20 +31,15 @@ void our_button::checkClick(int x, int y, sf::RenderWindow& window) {
 
 	if (x > rect.getPosition().x && x < rect.getPosition().x + rect.getSize().x) {
 		if (y > rect.getPosition().y && y < rect.getPosition().y + rect.getSize().y) {
-			rect.setFillColor(sf::Color(43, 60, 106));
+		
 			text.setFillColor(sf::Color::White);
 			text.setCharacterSize(sz + 10);
-			//window.draw(rect);
 			window.draw(text);
-	        
-	
-					//clicked = 1;
-
-
 		}
 
 
 	}
+
 
 		window.draw(text);
 	

@@ -38,6 +38,7 @@ void maze::display(RenderWindow& window)
 	{
 		for (int i = 0; i < 21 * level_number; i++)
 		{
+			
 			if (maze_arr[i][j] == 0)
 			{
 				dot.setPosition(j * (42 / level_number) + (10 / level_number), i * (42 / level_number) + (10 / level_number));
@@ -70,6 +71,7 @@ void maze::select_maze()
 			for (int j = 0; j < 25 * level_number; j++)
 			{
 				maze_arr[i][j] = maze_level_one[i][j];
+			
 			}
 		}
 	
@@ -83,6 +85,7 @@ void maze::select_maze()
 			for (int j = 0; j < 25 * level_number; j++)
 			{
 				maze_arr[i][j] = maze_level_two[i][j];
+				
 			}
 		}
 
@@ -94,9 +97,93 @@ void maze::select_maze()
 			for (int j = 0; j < 25 * level_number; j++)
 			{
 				maze_arr[i][j] = maze_level_three[i][j];
+			
 			}
 		}
 
 	}
 	
+}
+void maze::init(int level_number, int level ,bool mood)
+{
+	dot.setRadius(4 / level_number);
+
+	//pac_dots
+	pac_dot.setRadius(12 / level_number);
+
+	wall.setOutlineThickness(5 / (level_number));
+	//wall designe
+	wall.setSize(sf::Vector2f(32 / (level_number), 32 / (level_number)));
+	this->level = level;
+	this->level_number = level_number;
+	if(!mood)
+	select_maze();
+	else
+	{
+		select_maze_inf();
+	}
+}
+void maze::select_maze_inf()
+{
+	
+	if (level == 1)
+	{
+		for (int i = 0; i < 21 * level_number; i++)
+		{
+			for (int j = 0; j < 25 * level_number; j++)
+			{
+				if (maze_level_one[i][j] == 0 || maze_level_one[i][j] == 4)
+				{
+					maze_arr[i][j] = 2;
+				}
+				else
+				{
+					maze_arr[i][j] = maze_level_one[i][j];
+				}
+			}
+		}
+
+	}
+
+
+	else if (level == 2)
+	{
+	
+		for (int i = 0; i < 21 * level_number; i++)
+		{
+			for (int j = 0; j < 25 * level_number; j++)
+			{
+				if (maze_level_two[i][j] == 0 || maze_level_two[i][j] == 4)
+				{
+					maze_arr[i][j] = 2;
+				}
+				else
+				{
+					maze_arr[i][j] = maze_level_two[i][j];
+				}
+			}
+		}
+
+	}
+	else if (level == 3)
+	{
+		
+		for (int i = 0; i < 21 * level_number; i++)
+		{
+			for (int j = 0; j < 25 * level_number; j++)
+			{
+				if (maze_level_three[i][j] == 0 || maze_level_three[i][j] == 4)
+				{
+					maze_arr[i][j] = 2;
+				}
+				else
+				{
+					maze_arr[i][j] = maze_level_three[i][j];
+
+				}
+			}
+		}
+
+	}
+
 }

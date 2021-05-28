@@ -1,7 +1,9 @@
 #include "gost.h"
 
-void gost::move() {
-
+void gost::init(int level_number, int x, int y) {
+    gs.setSize(Vector2f(30 / level_number, 30 / level_number));
+    gs.setPosition(sf::Vector2f(x / level_number, y / level_number));
+    
 }
 void gost::set_pic(string path , int level_number)
 {

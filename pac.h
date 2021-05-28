@@ -24,4 +24,5 @@ public:
 		mood = mood1;
 	}
 	void action(maze& maze);
+	void init(int level_number);
 };

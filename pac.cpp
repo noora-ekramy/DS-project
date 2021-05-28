@@ -4,6 +4,13 @@
 #include "maze.h"
 #include"our_button.h"
 using namespace std;
+void pac::init(int level_number) {
+	pac_man.setRadius(15 / level_number);
+	pac_man.setPosition(sf::Vector2f(12 * 42, 15 * 42));
+	this->level_number = level_number;
+	score = 0;
+	dirction = 0;
+}
 pac::pac(sf::RenderWindow& window , int num)
 {//
 	mood = 0;
@@ -37,12 +44,14 @@ void pac::move(maze& maze)
 			{
 				maze.maze_arr[int((pos.y - 1) / (42 / level_number))][int(pos.x / (42 / level_number))] = 2;
 				score++;
+				maze.allpoint--;
 			}
 			if (maze.maze_arr[int((pos.y - 1) / (42 / level_number))][int(pos.x / (42 / level_number))] == 4)
 			{
 				maze.maze_arr[int((pos.y - 1) / (42 / level_number))][int(pos.x / (42 / level_number))] = 2;
 				score += 50;
 				mood = 1;
+				maze.allpoint--;
 			}
 			pac_man.move(0, -speed);
 			//sprite.setRotation(270);
@@ -61,12 +70,14 @@ void pac::move(maze& maze)
 			{
 				maze.maze_arr[int((pos.y + 1) / (42 / level_number)) + 1][int(pos.x / (42 / level_number))] = 2;
 				score++;
+				maze.allpoint--;
 			}
 			if (maze.maze_arr[int((pos.y + 1) / (42 / level_number)) + 1][int(pos.x / (42 / level_number))] == 4)
 			{
 				maze.maze_arr[int((pos.y + 1) / (42 / level_number)) + 1][int(pos.x / (42 / level_number))] = 2;
 				score += 50;
 				mood = 1;
+				maze.allpoint--;
 			}
 			pac_man.move(0, speed);
 			//pac_man.setRotation(90);
@@ -87,12 +98,14 @@ void pac::move(maze& maze)
 				{
 					maze.maze_arr[int(pos.y / (42 / level_number))][int((pos.x + 1) / (42 / level_number)) + 1] = 2;
 					score++;
+					maze.allpoint--;
 				}
 				if (maze.maze_arr[int(pos.y / (42 / level_number))][int((pos.x + 1) / (42 / level_number)) + 1] == 4)
 				{
 					maze.maze_arr[int(pos.y / (42 / level_number))][int((pos.x + 1) / (42 / level_number)) + 1] = 2;
 					score += 50;
 					mood = 1;
+					maze.allpoint--;
 				}
 				pac_man.move(speed, 0);
 				//pac_man.setRotation(0);
@@ -115,12 +128,14 @@ void pac::move(maze& maze)
 				{
 					maze.maze_arr[int(pos.y / (42 / level_number))][int((pos.x - 1) / (42 / level_number))] = 2;
 					score++;
+					maze.allpoint--;
 				}
 				if (maze.maze_arr[int(pos.y / (42 / level_number))][int((pos.x - 1) / (42 / level_number))] == 4)
 				{
 					maze.maze_arr[int(pos.y / (42 / level_number))][int((pos.x - 1) / (42 / level_number))] = 2;
 					score += 50;
 					mood = 1;
+					maze.allpoint--;
 				}
 				
 				pac_man.move(-speed, 0);
