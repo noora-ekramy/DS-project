@@ -156,9 +156,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="our_button.cpp" />
     <ClCompile Include="gost.cpp" />
     <ClCompile Include="maze.cpp" />
-    <ClCompile Include="moving_members.cpp" />
     <ClCompile Include="omap.cpp" />
     <ClCompile Include="oset.cpp" />
     <ClCompile Include="ovetor.cpp" />
@@ -166,13 +166,16 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="our_button.h" />
     <ClInclude Include="gost.h" />
     <ClInclude Include="maze.h" />
-    <ClInclude Include="moving_members.h" />
     <ClInclude Include="omap.h" />
     <ClInclude Include="oset.h" />
     <ClInclude Include="ovetor.h" />
     <ClInclude Include="pac.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="XMLFile.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

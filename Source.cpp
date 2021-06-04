@@ -6,7 +6,130 @@
 #include "gost.h"
 #include "our_button.h"
 #include<sstream>
+#include <fstream>
+#include<vector>
+#include "rapidxml.hpp"
+#include<map>
+#include<vector>
+#include <cstring>
+#include <fstream>
+#include "string.h"
+#include "rapidxml.hpp"
+#include "rapidxml_print.hpp"
+#include "rapidxml_utils.hpp"
+#include "tinyxml2.cpp"
+#ifndef XMLCheckResult
+#define XMLCheckResult(a_eResult) if (a_eResult != XML_SUCCESS) { printf("Error: %i\n", a_eResult); return a_eResult; }
+#endif
+using namespace rapidxml;
 using namespace sf;
+using namespace tinyxml2;
+
+map<string, int >highscormap;
+vector<pair<int ,  string>>highscorvector;
+
+xml_document<> doc;
+xml_node<>* root_node = NULL;
+
+
+void reading_from_xmlfile()
+{
+	
+		string name;
+		string score;
+		int iscore;
+
+		XMLDocument doc;
+		const char* path = "XMLFile.xml";
+		char accountNumberChar[100];
+		doc.LoadFile(path);
+
+
+		XMLElement* pRootElement = doc.RootElement();
+		if (NULL != pRootElement) {
+
+			XMLElement* pmemberss = pRootElement->FirstChildElement("members");
+			if (NULL != pmemberss) {
+
+				XMLElement* pmember = pmemberss->FirstChildElement("member");
+				while (pmember) {
+
+					XMLElement* pname = pmember->FirstChildElement("name");
+					if (NULL != pname) {
+
+						name=pname->GetText();
+					}
+					//Get 'type' Child
+					XMLElement* pscore = pmember->FirstChildElement("score");
+					if (NULL != pscore) {
+
+						score=pscore->GetText();
+
+					}
+					stringstream nora(score);
+					nora >> iscore;
+					highscorvector.push_back(make_pair(iscore, name));
+					// Next Account
+					pmember = pmember->NextSiblingElement("member");
+				}
+
+			}
+
+		}
+		for (int i = 0; i < highscorvector.size(); i++)
+		{
+			cout << highscorvector[i].first << " " << highscorvector[i].second << endl;
+		}
+	
+}
+
+void saving_to_xmlfile()
+{
+	XMLDocument doc;
+	const char* path = "XMLFile.xml";
+	char accountNumberChar[100];
+	doc.LoadFile(path);
+
+	int i = 0;
+	XMLElement* pRootElement = doc.RootElement();
+	if (NULL != pRootElement) {
+
+		XMLElement* pmemberss = pRootElement->FirstChildElement("members");
+		if (NULL != pmemberss) {
+
+			XMLElement* pmember = pmemberss->FirstChildElement("member");
+			while (pmember && i<highscorvector.size()) {
+
+				XMLElement* pname = pmember->FirstChildElement("name");
+				if (NULL != pname) {
+					
+					char s[ 100];
+					strcpy(s, highscorvector[i].second.c_str());
+					pname->SetText(s);
+				}
+				
+				XMLElement* pscore = pmember->FirstChildElement("score");
+				if (NULL != pscore) {
+					
+					string sscore ;
+					char s[100];
+					sscore = to_string(highscorvector[i].first);
+					strcpy(s, sscore.c_str());
+					pscore->SetText(s);
+
+				}
+
+
+				i++;
+				pmember = pmember->NextSiblingElement("member");
+			}
+
+		}
+
+	}
+	doc.SaveFile(path);
+}
+
 int level_num = 1;
 int maze_num = 1;
 bool inf = 0;
@@ -91,12 +214,15 @@ bool lose(gost g)
 }
 int main()
 {
-
-	sf::Music music;
-	if (!music.openFromFile("sound2.WAV"))
-	{
-		cout << "kokokokoko";
-	}
+	reading_from_xmlfile();
+	
+	
+	sf::SoundBuffer buffer;
+	if (!buffer.loadFromFile("sound2.wav"))
+		cout << "yalhwwwwwy";
+	sf::Sound sound;
+	sound.setBuffer(buffer);
+	sound.play();
 	bg.loadFromFile("bg1.jpg");
 	bgsq.setTexture(&bg);
 	bgsq.setPosition(sf::Vector2f(0 , 0));
@@ -323,14 +449,14 @@ int main()
 
 
 					}
-					if (pac_frame == 2)
+					if (pac_frame == 1)
 					{
 						pac_frame = 0;
 						p.move(maz);
 
 
 					}
-					if (firmoodfr == 1)
+					if (firmoodfr == 2)
 					{
 						g1.set_pic(s1, level_num);
 						g2.set_pic(s2, level_num);
@@ -558,9 +684,33 @@ int main()
 		}
 		if (RANK)
 		{
+
+
 			window.clear();
 			our_button back("BACk", 30, 30 * 28, 75, 175, window);
 			window.clear();
+
+			for (int i = 4; i >= 0; i++)
+			{
+				our_button ab2("NAME", 40, 30, 30, window);
+				ab2.display(window);
+				our_button ab3("SCore", 300, 30, 30, window);
+				ab3.display(window);
+				if (highscorvector[i].second == "0")
+				{
+					our_button ab1("..... ", 40, 30 + (5-i) * 50, 20, window);
+					ab1.display(window);
+					our_button ab4("..... ", 300, 30 + (5 - i) * 50, 20, window);
+					ab4.display(window);
+				}
+				else
+				{
+					our_button ab1(highscorvector[i].second, 40, 30 + (5 - i) * 50, 20, window);
+					ab1.display(window);
+					our_button ab4(to_string(highscorvector[i].first), 300, 30 + (5 - i) * 50, 20, window);
+					ab4.display(window);
+				}
+			}
 			back.checkClick(event.mouseMove.x, event.mouseMove.y, window);
 			if (back.rect.getGlobalBounds().contains(window.mapPixelToCoords(sf::Vector2i(event.mouseButton.x, event.mouseButton.y))))
 			{
